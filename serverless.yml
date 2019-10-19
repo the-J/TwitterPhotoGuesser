@@ -1,0 +1,53 @@
+service: twitterphotoguesser
+
+custom:
+  CRC_URL: ${file(./serverless.env.yml):CRC_URL}
+  ENVIRONMENT: ${file(./serverless.env.yml):ENVIRONMENT}
+  TWITTER_CONSUMER_KEY: ${file(./serverless.env.yml):TWITTER_CONSUMER_KEY}
+  TWITTER_CONSUMER_SECRET: ${file(./serverless.env.yml):TWITTER_CONSUMER_SECRET}
+  TWITTER_TOKEN: ${file(./serverless.env.yml):TWITTER_TOKEN}
+  TWITTER_TOKEN_SECRET: ${file(./serverless.env.yml):TWITTER_TOKEN_SECRET}
+  URL_BASE: ${file(./serverless.env.yml):URL_BASE}
+  URL_CREATE: ${file(./serverless.env.yml):URL_CREATE}
+  BUCKET: twitterphotoguesser
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: serverless-main
+  region: eu-north-1 #Stockholm
+  environment:
+    TWITTER_CONSUMER_KEY: ${self:custom.TWITTER_CONSUMER_KEY}
+    TWITTER_CONSUMER_SECRET: ${self:custom.TWITTER_CONSUMER_SECRET}
+    TWITTER_TOKEN: ${self:custom.TWITTER_TOKEN}
+    TWITTER_TOKEN_SECRET: ${self:custom.TWITTER_TOKEN_SECRET}
+    ENVIRONMENT: ${self:custom.ENVIRONMENT}
+    CRC_URL: ${self:custom.CRC_URL}
+    URL_BASE: ${self:custom.URL_BASE}
+    URL_CREATE: ${self:custom.URL_CREATE}
+    BUCKET: ${self:custom.BUCKET}
+
+functions:
+  handleCrc:
+    handler: src/lambda_func/handleCrc.handler
+    events:
+      - http:
+          path: twitter/webhook/handleapi
+          method: get
+    description: Lambda function to complete Twitter API auth challenge.
+
+  registerWebhook:
+    handler: src/lambda_func/registerWebhook.handler
+    events:
+      - http:
+          path: twitter/webhook/register
+          method: get
+    description: Lambda function that register new webhook in Twitter Acitivty API.
+
+  registerSubscription:
+    handler: src/lambda_func/registerSubscription.handler
+    events:
+      - http:
+          path: subscriptions/register
+          method: get
+    description: Lambda function that get webhook in Twitter Acitivty API.

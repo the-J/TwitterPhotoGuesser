@@ -1,0 +1,31 @@
+{
+  "name": "twitterphotoguesser",
+  "version": "1.0.0",
+  "description": "Guesses what is on the photo.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"./src/*.js\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-J/TwitterPhotoGuesser.git"
+  },
+  "author": "Juliusz Jakubowski <the-j.user@noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-J/TwitterPhotoGuesser/issues"
+  },
+  "homepage": "https://github.com/the-J/TwitterPhotoGuesser#readme",
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.553.0",
+    "js-yaml": "^3.13.1",
+    "node-fetch": "^2.6.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "serverless": "^1.54.0"
+  }
+}

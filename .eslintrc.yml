@@ -1,0 +1,41 @@
+env:
+  browser: true
+  node: true
+  commonjs: true
+  es6: true
+  jest: true
+extends:
+  - eslint:recommended
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+rules:
+  indent:
+    - error
+    - 4
+  semi:
+    - error
+    - never
+  no-console:
+    - error
+    - allow:
+        - error
+        - warn
+        - info
+  object-curly-spacing:
+    - error
+    - always
+  array-bracket-spacing:
+    - error
+    - never
+  jsx-quotes:
+    - error
+    - prefer-single
+  lines-between-class-members:
+    - error
+    - always
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  react/display-name:
+    - off
